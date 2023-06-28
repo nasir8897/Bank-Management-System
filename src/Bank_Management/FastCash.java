@@ -18,6 +18,7 @@ public class FastCash extends JFrame implements ActionListener
 	FastCash(String pinnumber)
 	{
 		this.pinnumber=pinnumber;
+		setUndecorated(true);
 		setLayout(null);
 		
 		JLabel imglabel=new JLabel();
@@ -126,7 +127,7 @@ public class FastCash extends JFrame implements ActionListener
 		
 		else
 		{
-			String amount=((JButton)e.getSource()).getText().substring(3);
+			String amount=((JButton)e.getSource()).getText().substring(3); 		//rs 100
 			
 			Comn conn=new Comn();
 			try

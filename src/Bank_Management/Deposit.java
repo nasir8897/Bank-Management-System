@@ -19,7 +19,7 @@ public class Deposit extends JFrame implements ActionListener
 	Deposit(String pinnumber)
 	{
 		this.pinnumber=pinnumber;
-		
+		setUndecorated(true);
 		setLayout(null);
 		
 		JLabel label=new JLabel();

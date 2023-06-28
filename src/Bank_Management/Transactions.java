@@ -23,27 +23,33 @@ public class Transactions extends JFrame implements ActionListener
 		
 		JLabel imglabel=new JLabel();
 		ImageIcon img=new ImageIcon(this.getClass().getResource("/atm.jpg"));
-		Image i2=img.getImage().getScaledInstance(900,900,Image.SCALE_DEFAULT);
-		ImageIcon img2=new ImageIcon(i2);
-		imglabel.setIcon(img2);
+//		Image i2=img.getImage().getScaledInstance(900,900,Image.SCALE_DEFAULT);
+//		ImageIcon img2=new ImageIcon(i2);
+		imglabel.setIcon(img);
 		imglabel.setBounds(0,0,900,900);
 		getContentPane().add(imglabel);
 		
 		
-		JLabel neme1=new JLabel();
-		neme1.setBounds(190,300,300,40);
-		neme1.setForeground(Color.white);
-		neme1.setFont(new Font("Raleway",Font.BOLD,20));
-		imglabel.add(neme1);
+		JLabel welcome=new JLabel("Welcome To ABC ATM ");
+		welcome.setBounds(250,280,300,40);
+		welcome.setForeground(Color.white);
+		welcome.setFont(new Font("Raleway",Font.BOLD,20));
+		imglabel.add(welcome);
+		
+		JLabel name1=new JLabel( );
+		name1.setBounds(260,310,300,40);
+		name1.setForeground(Color.GREEN);
+		name1.setFont(new Font("Raleway",Font.BOLD,20));
+		imglabel.add(name1);
 		
 		JLabel atmheading=new JLabel("Please Select your Transaction");
-		atmheading.setBounds(190,350,300,40);
+		atmheading.setBounds(200,350,300,40);
 		atmheading.setForeground(Color.white);
 		atmheading.setFont(new Font("Raleway",Font.BOLD,20));
 		imglabel.add(atmheading);
 		
 		 b1=new JButton("Deposit");
-		b1.setBounds(153,417,130,28);
+		b1.setBounds(165,417,130,28);
 		b1.setFont(new Font("Raleway",Font.BOLD,12));
 		b1.setForeground(Color.blue);
 		b1.addActionListener(this);
@@ -51,7 +57,7 @@ public class Transactions extends JFrame implements ActionListener
 		
 		
 		 b2=new JButton("Chash Withdrawl");
-		b2.setBounds(390,417,130,28);
+		b2.setBounds(420,417,130,28);
 		b2.setFont(new Font("Raleway",Font.BOLD,12));
 		b2.setForeground(Color.blue);
 		b2.addActionListener(this);
@@ -59,7 +65,7 @@ public class Transactions extends JFrame implements ActionListener
 		
 		
 		 b3=new JButton("Fast Cash");
-		b3.setBounds(153,452,130,28);
+		b3.setBounds(165,460,130,28);
 		b3.setFont(new Font("Raleway",Font.BOLD,12));
 		b3.setForeground(Color.blue);
 		b3.addActionListener(this);
@@ -67,7 +73,7 @@ public class Transactions extends JFrame implements ActionListener
 				
 		
 		 b4=new JButton("Mini Statement");
-		b4.setBounds(390,452,130,28);
+		b4.setBounds(420,460,130,28);
 		b4.setFont(new Font("Raleway",Font.BOLD,12));
 		b4.setForeground(Color.blue);
 		b4.addActionListener(this);
@@ -75,7 +81,7 @@ public class Transactions extends JFrame implements ActionListener
 		
 //		
 		 b5=new JButton("Pin Change");
-		b5.setBounds(153,485,130,28);
+		b5.setBounds(165,500,130,28);
 		b5.setFont(new Font("Raleway",Font.BOLD,12));
 		b5.setForeground(Color.blue);
 		b5.addActionListener(this);
@@ -83,7 +89,7 @@ public class Transactions extends JFrame implements ActionListener
 		
 		
 		 b6=new JButton("Balence Enquiry");
-		b6.setBounds(390,485,130,28);
+		b6.setBounds(420,500,130,28);
 		b6.setFont(new Font("Raleway",Font.BOLD,12));
 		b6.setForeground(Color.blue);
 		b6.addActionListener(this);
@@ -92,7 +98,7 @@ public class Transactions extends JFrame implements ActionListener
 	
 		
 		 b7=new JButton("Exit");
-		b7.setBounds(390,520,130,28);
+		b7.setBounds(420,540,130,28);
 		b7.setFont(new Font("Raleway",Font.BOLD,12));
 		b7.setForeground(Color.blue);
 		b7.addActionListener(this);
@@ -100,23 +106,26 @@ public class Transactions extends JFrame implements ActionListener
 		
 //===================================================================================
 		
-		String name1;
+//		String name2;
 		try
 		{
 			Comn conn=new Comn();
 			ResultSet rs=conn.s.executeQuery("select * from longin where PinNumber='"+pinnumber+"'");
-			
+			int name = 0;
 			while(rs.next())
 			{
-				//name1.setText(rs.getString("formNo"));
+				
+				 name=Integer.parseInt(rs.getString("formNo"));
 			}
 			
 			
-			ResultSet rs1=conn.s.executeQuery("select * from singin where formNo='"+neme1+"'");
+			ResultSet rs1=conn.s.executeQuery("select * from singin where formNo='"+name+"'");
 			
+			
+		
 			while(rs1.next())
 			{
-				neme1.setText(rs1.getString("name"));
+				name1.setText("Mr/Ms:-"+(rs1.getString("name")));
 			}
 			
 			
@@ -133,7 +142,7 @@ public class Transactions extends JFrame implements ActionListener
 		
 		setSize(900,900);
 		setLocation(300,0);
-//		setUndecoret(true);
+		setUndecorated(true);
 		setVisible(true);
 		
 	}
@@ -178,6 +187,7 @@ public class Transactions extends JFrame implements ActionListener
 		else if(e.getSource()==b4)
 		{
 			
+//			setVisible(true);
 			new MiniStatement(pinnumber).setVisible(true);
 		}
 		

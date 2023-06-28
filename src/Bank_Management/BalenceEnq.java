@@ -17,6 +17,8 @@ public class BalenceEnq extends JFrame implements ActionListener
 	{
 		this.pinnumber=pinnumber;
 		
+		setUndecorated(true);
+		
 		ImageIcon img=new ImageIcon(this.getClass().getResource("/atm.jpg"));
 		JLabel imglabel=new JLabel();
 		imglabel.setIcon(img);
@@ -25,13 +27,13 @@ public class BalenceEnq extends JFrame implements ActionListener
 		
 		b1=new JButton("Back");
 		b1.setFont(new Font("Raleway",Font.BOLD,15));
-		b1.setBounds(170,510,100,30);
+		b1.setBounds(170,535,100,30);
 		b1.addActionListener(this);
 		imglabel.add(b1);
 		
 		b2=new JButton("Exit");
 		b2.setFont(new Font("Raleway",Font.BOLD,15));
-		b2.setBounds(450,510,100,30);
+		b2.setBounds(450,535,100,30);
 		b2.addActionListener(this);
 		imglabel.add(b2);
 		

@@ -5,36 +5,39 @@ import java.util.*;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.sql.ResultSet;
 
 import com.toedter.calendar.JDateChooser;
 
-public class SinginOne extends JFrame implements ActionListener {
+public class SigninOneModify extends JFrame implements ActionListener {
 	
 //=================	Global Declaration ====================
-	Long random;
+	
 	JTextField namebox,fanamebox,emailbox,AdressBox,cityBox,stateBox,pinBox;
 	JDateChooser datechooser;
 	JRadioButton male,female;
 	ButtonGroup genderGroup;
 	JRadioButton maried,unmaried,others;
 	ButtonGroup statusGroup;
-	JButton next,back;
+	JButton next,back,cancel;
+	String formNo;
 	
-	
-	SinginOne()
+	SigninOneModify(String formNo)
 	{
+		this.formNo=formNo;
 		setTitle("New Account Application Form: 1");
 		setLayout(null);
 		
 		//Random Numbers Count 
-		Random ran=new Random();
-		 random=Math.abs((ran.nextLong()%9000L)+1000L);
+		
+		
+		
 		
 		//Form Heading And Form Number
-		JLabel formNo=new JLabel("Application Form Number:-"+random);
-		formNo.setFont(new Font("Ralway",Font.BOLD,40));
-		formNo.setBounds(150,20,800,50);
-		add(formNo);
+		JLabel formNu=new JLabel("Application Form Number:- "+formNo);
+		formNu.setFont(new Font("Ralway",Font.BOLD,40));
+		formNu.setBounds(150,20,800,50);
+		add(formNu);
 		
 		//Page Details
 		JLabel personDetails=new JLabel("Page 1: Personal Details");
@@ -102,9 +105,10 @@ public class SinginOne extends JFrame implements ActionListener {
 		
 //================== All Text BOX: ==============================
 		
+		
 		 namebox=new JTextField();
-		namebox.setBounds(300,150,300,30);
-		namebox.setFont(new Font("Railway",Font.ITALIC,20));
+		 namebox.setBounds(300,150,300,30);
+		 namebox.setFont(new Font("Railway",Font.ITALIC,20));
 		add(namebox);
 		
 		 fanamebox=new JTextField();
@@ -143,6 +147,7 @@ public class SinginOne extends JFrame implements ActionListener {
 		//Date Of Birth
 		 datechooser=new JDateChooser();
 		datechooser.setBounds(300,250,300,30);
+		datechooser.setFont(new Font("Railway",Font.ITALIC,20));
 		add(datechooser);
 		
 		//Gender
@@ -190,7 +195,7 @@ public class SinginOne extends JFrame implements ActionListener {
 		
 		
 		 next=new JButton("Next");
-		next.setBackground(Color.BLACK);
+		next.setBackground(Color.BLUE);
 		next.setForeground(Color.white);
 		next.setFont(new Font("Railway",Font.BOLD,20));
 		next.setBounds(520,700,80,30);
@@ -198,17 +203,66 @@ public class SinginOne extends JFrame implements ActionListener {
 		add(next);
 		
 		 back=new JButton("Back");
-		 back.setBackground(Color.BLACK);
+		 back.setBackground(Color.MAGENTA);
 		 back.setForeground(Color.white);
 		 back.setFont(new Font("Railway",Font.BOLD,20));
 		 back.setBounds(100,700,100,30);
 		 back.addActionListener(this);
 		add(back);
 		
+		 cancel=new JButton("Cancel");
+			cancel.setFont(new Font("Railway",Font.BOLD,17));
+			cancel.setBounds(300,700,100,30);
+			cancel.setBackground(Color.RED);
+			cancel.setForeground(Color.white);
+			cancel.addActionListener(this);
+			add(cancel);
+		
+		
+			
+//=======================================================================================================
+			
+			try
+			{
+				Comn conn=new Comn();
+				
+				
+				ResultSet rs=conn.s.executeQuery("select * from singin where formNo='"+formNo+"'");
+				
+				
+				while (rs.next())
+				{
+					
+				namebox.setText(rs.getString("name"));
+				fanamebox.setText(rs.getString("fname"));
+				emailbox.setText(rs.getString("email"));
+				AdressBox.setText(rs.getString("adress"));
+				cityBox.setText(rs.getString("city"));
+				stateBox.setText(rs.getString("state"));
+				pinBox.setText(rs.getString("pincode"));
+//				datechooser.setText(rs.getString("dob"));
+//				genderGroup.setText(rs.getString("pincode"));
+					
+					
+				}
+				
+				
+				
+				
+			}
+			catch(Exception e )
+			{
+				System.out.println(e);
+			}
+			
+			
+			
+//=======================================================================================================
+			
 		
 //======================= Page set-up : ==================================
 		
-		getContentPane().setBackground(Color.white);
+		getContentPane().setBackground(Color.LIGHT_GRAY);
 		setSize(850,800);
 		setLocation(350,10);
 		setVisible(true);
@@ -220,7 +274,8 @@ public class SinginOne extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent ea) 
 	{
 		
-		String formNo=""+random;
+
+		
 		String name=namebox.getText();
 		String fname=fanamebox.getText();
 		String email=emailbox.getText();
@@ -255,41 +310,44 @@ public class SinginOne extends JFrame implements ActionListener {
 		}
 		
 //---------------------------------------------------------------------------------
-		try
+		if (ea.getSource()==next)
 		{
-			if(name.equals(""))
-			{
-				JOptionPane.showMessageDialog(null,"Name Is Reaqied");
-			}
-			else if(fname.equals(""))
-			{
-				JOptionPane.showMessageDialog(null,"Father Name Is Reaqied");
-			}
-			else if(email.equals(""))
-			{
-				JOptionPane.showMessageDialog(null,"Email Is Reaqied");
-			}
-			else if(adress.equals(""))
-			{
-				JOptionPane.showMessageDialog(null,"Adress Is Reaqied");
-			}
-			else if(city.equals(""))
-			{
-				JOptionPane.showMessageDialog(null,"City Is Reaqied");
-			}
-			else if(state.equals(""))
-			{
-				JOptionPane.showMessageDialog(null,"State Is Reaqied");
-			}
-			else if(pin.equals(""))
-			{
-				JOptionPane.showMessageDialog(null,"PIN No Is Reaqied");
-			}
 			
-			else if(dob.equals(""))
+			try
 			{
-				JOptionPane.showMessageDialog(null,"Data Of Birth Is Reaqied");
-			}
+				if(name.equals(""))
+				{
+					JOptionPane.showMessageDialog(null,"Name Is Reaqied");
+				}
+				else if(fname.equals(""))
+				{
+					JOptionPane.showMessageDialog(null,"Father Name Is Reaqied");
+				}
+				else if(email.equals(""))
+				{
+					JOptionPane.showMessageDialog(null,"Email Is Reaqied");
+				}
+				else if(adress.equals(""))
+				{
+					JOptionPane.showMessageDialog(null,"Adress Is Reaqied");
+				}
+				else if(city.equals(""))
+				{
+					JOptionPane.showMessageDialog(null,"City Is Reaqied");
+				}
+				else if(state.equals(""))
+				{
+					JOptionPane.showMessageDialog(null,"State Is Reaqied");
+				}
+				else if(pin.equals(""))
+				{
+					JOptionPane.showMessageDialog(null,"PIN No Is Reaqied");
+				}
+				
+				else if(dob.equals(""))
+				{
+					JOptionPane.showMessageDialog(null,"Data Of Birth Is Reaqied");
+				}
 //			else if(gender.equals("Gender Is Requied"))
 //			{
 //				JOptionPane.showMessageDialog(null,"Data Of Birth Is Reaqied");
@@ -298,41 +356,48 @@ public class SinginOne extends JFrame implements ActionListener {
 //			{
 //				JOptionPane.showMessageDialog(null,"Data Of Birth Is Reaqied");
 //			}
-			
-			
+				
+				
 //=============================	Insert INTO SQL Data Base This All Values	========================================
-			else
-			{
-				Comn c=new Comn();
+				else
+				{
+					Comn c=new Comn();
 //-------------------------------  4.Execute Query (Values insert into the SQL By using INSERT Query)	------------------------------
-				String query="insert into singin values('"+formNo+"',' "+name+"','"+fname+"',' "+email+"',' "+adress+"',' "+city+"',' "+state+"',' "+pin+"',' "+dob+"' ,'"+gender+"' ,'"+status+"')";
-		//Execute the query by using (Statement {s =c..createStatment}) with help of comn Class 
-				c.s.executeUpdate(query);
-				
+					//String query1="insert into singin values('"+formNo+"',' "+name+"','"+fname+"',' "+email+"',' "+adress+"',' "+city+"',' "+state+"',' "+pin+"',' "+dob+"' ,'"+gender+"' ,'"+status+"')";
+					String query1="update singin set name='"+name+"', fname='"+fname+"',email='"+email+"',adress='"+adress+"',city='"+city+"',state=' "+state+"',pincode=' "+pin+"',dob=' "+dob+"',gender=' "+gender+"',status=' "+status+"' where formNo='"+formNo+"' " ;
+					
+					//Execute the query by using (Statement {s =c..createStatment}) with help of comn Class 
+					c.s.executeUpdate(query1);
+					
 //------------It connect for Other Class this two steps use (Form Number Also Pass Other CLass)--------------
-				setVisible(false);
+					setVisible(false);
+					
+					new SignInTwo(formNo).setVisible(true);
+					
+				}
 				
-				new SinginTwo(formNo).setVisible(true);
-				
+			}
+			catch(Exception e)
+			{
+				System.out.println(e);
 			}
 			
 		}
-		catch(Exception e)
-		{
-			System.out.println(e);
-		}
-		
-		if (ea.getSource()==back)
+		else if (ea.getSource()==back)
 		{
 			setVisible(false);
 			new LogIn("").setVisible(true);
 			
 		}
+		else if(ea.getSource()==cancel)
+		{
+			System.exit(0);
+		}
 	}
 
 	public static void main(String[] args) 
 	{
-		new SinginOne();
+		new SigninOneModify("");
 	}
 
 }

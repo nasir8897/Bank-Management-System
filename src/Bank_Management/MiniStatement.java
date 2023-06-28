@@ -2,16 +2,19 @@ package Bank_Management;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-public class MiniStatement extends JFrame 
+public class MiniStatement extends JFrame implements ActionListener
 {
 	
 	String pinnumber;
+	JButton exit;
 	
 	MiniStatement(String pinnumber)
 	{
@@ -19,50 +22,71 @@ public class MiniStatement extends JFrame
 		
 		setLayout(null);
 		setTitle("Mini Statement");
+		setUndecorated(true);
 		
 		
-		JLabel text=new JLabel();
-		
-		add(text);
+		ImageIcon img=new ImageIcon(this.getClass().getResource(""));
+		JLabel imglabel=new JLabel();
+		imglabel.setIcon(img);
+		imglabel.setBounds(0,0,800,500);
+		getContentPane().add(imglabel);
 		
 		JLabel balence=new JLabel();
-		balence.setBounds(20,600,400,30);
+		balence.setBounds(50,400,400,30);
 		balence.setFont(new Font("Raleway",Font.BOLD,15));
 		balence.setForeground(Color.DARK_GRAY);
-		add(balence);
+		imglabel.add(balence);
 		
-		JLabel head=new JLabel("State Bank Of India");
-		head.setFont(new Font("Raleway",Font.LAYOUT_NO_LIMIT_CONTEXT,20));
+		JLabel head=new JLabel("Bank Of ABC");
+		head.setFont(new Font("Raleway",Font.BOLD,20));
 		head.setForeground(Color.RED);
-		head.setBounds(150,20,200,30);
-		add(head);
+		head.setBounds(320,20,200,30);
+		imglabel.add(head);
 		
 		JLabel head1=new JLabel("Mini Statement");
-		head1.setFont(new Font("Raleway",Font.LAYOUT_NO_LIMIT_CONTEXT,15));
+		head1.setFont(new Font("Raleway",Font.BOLD,15));
 		head1.setForeground(Color.BLACK);
-		head1.setBounds(180,50,200,30);
-		add(head1);
+		head1.setBounds(330,50,200,30);
+		imglabel.add(head1);
 		
 		
 		JLabel card=new JLabel();
-		card.setBounds(20,100,300,30);
+		card.setBounds(50,100,300,30);
 		card.setFont(new Font("Raleway",Font.BOLD,15));
 		card.setForeground(Color.DARK_GRAY);
-		add(card);
+		imglabel.add(card);
 		
-		//JTable ta=new JTable();
+		 exit=new JButton("Exit");
+		exit.setBounds(650,400,80,30);
+		exit.setFont(new Font("Ralway",Font.BOLD,15));
+		exit.setBackground(Color.MAGENTA);
+		exit.addActionListener(this);
+//		exit.setBorder(null);
+		imglabel.add(exit);
 		
-		JTable mini=new JTable();
-		mini.setBounds(20,150,400,420);
-		//mini.setBackground(Color.BLUE);
-		add(mini);
+		
+		
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(50, 160, 700, 200);
+		imglabel.add(scrollPane);
+		
+		JTable table = new JTable();
+		table.setFont(new Font("Tahoma",Font.BOLD,10));
+		table.setBackground(Color.WHITE);
+//		table.setForeground(Color.RED);
+		scrollPane.setViewportView(table);
+		DefaultTableModel model=(DefaultTableModel) table.getModel(); 
+		
+//============================================ 		Table Statement		===========================================================================		
 		
 		try
 		{
 			Comn conn=new Comn();
-			ResultSet rs=conn.s.executeQuery("select * from longin where PinNumber='"+pinnumber+"'");
+			//ResultSet rs=conn.s.executeQuery("select * from longin where PinNumber='"+pinnumber+"'");
+			String query="select * from bank where pin= '"+pinnumber+"' ";
+			ResultSet rs=conn.s.executeQuery(query);
 			ResultSetMetaData rdms=rs.getMetaData();
-			DefaultTableModel model = null;
 			
 			
 			int col=rdms.getColumnCount();
@@ -72,13 +96,26 @@ public class MiniStatement extends JFrame
 				colName[i]=rdms.getColumnName(i+1);
 				model.setColumnIdentifiers(colName);
 			}
+			
+			String PIN,date,type,Amount;
+			while(rs.next())
+			{
+				PIN=rs.getString(1);
+				date=rs.getString(2);
+				type=rs.getString(3);
+				Amount=rs.getString(4);
+						
+				String [] row= {PIN,date,type,Amount};
+				model.addRow(row);
+			}
+					
 		}
 		catch(Exception e)
 		{
-			
+			System.out.println(e);
 		}
 		
-		
+//============================================================  	Card Number  	=====================================================================
 		try
 		{
 			Comn conn=new Comn();
@@ -95,6 +132,8 @@ public class MiniStatement extends JFrame
 		{
 			System.out.println(e);
 		}
+		
+//========================================================	  Balence		==================================================================		
 		
 		try 
 		
@@ -128,7 +167,7 @@ public class MiniStatement extends JFrame
 		}
 		
 		
-		setSize(500,800);
+		setSize(800,500);
 		setLocation(20,20);
 		getContentPane().setBackground(Color.white);
 		setVisible(true);
@@ -136,14 +175,24 @@ public class MiniStatement extends JFrame
 		
 	}
 	
-	private void setTitel() 
-	{
-		
-	}
+	
 
 	public static void main(String args [])
 	{
 		new MiniStatement("");
+	}
+
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		
+		if(e.getSource()==exit)
+		{
+			setVisible(false);
+			new Transactions(pinnumber).setVisible(true);
+		}
 	}
 
 }

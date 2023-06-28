@@ -5,22 +5,23 @@ import java.util.*;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.sql.ResultSet;
 
-public class SinginTwo extends JFrame implements ActionListener {
+public class SignInTwo extends JFrame implements ActionListener {
 	
 //=================	Global Declarartion ====================
-	Long random;
+	
 	JTextField panBox,adharBox;
 	JComboBox religionBox,categoryBox,incomeBox,educationBox,acupationBox;
 	JRadioButton seniorBox1,seniorBox2;
 	ButtonGroup seniorGroup;
 	JRadioButton accountyes,accountno;
 	ButtonGroup accountGroup;
-	JButton next;
+	JButton next,back,cancel;
 	String formNo;
 	
 //=======	the perameter inside recive the value of 'form number'
-	SinginTwo(String formNo)
+	SignInTwo(String formNo)
 	{
 		this.formNo=formNo;
 		setTitle("New Account Application Form: 2");
@@ -175,16 +176,35 @@ public class SinginTwo extends JFrame implements ActionListener {
 		
 		
 		 next=new JButton("Next");
-		next.setBackground(Color.BLACK);
+		next.setBackground(Color.BLUE);
 		next.setForeground(Color.white);
 		next.setFont(new Font("Railway",Font.BOLD,20));
 		next.setBounds(520,700,80,30);
 		next.addActionListener(this);
 		add(next);
 		
+		
+		back=new JButton("Back");
+		back.setFont(new Font("Raleway",Font.BOLD,17));
+		back.setBounds(100,700,80,30);
+		back.setBackground(Color.MAGENTA);
+		back.setForeground(Color.white);
+		back.addActionListener(this);
+		add(back);
+		
+		 cancel=new JButton("Cancel");
+		cancel.setFont(new Font("Railway",Font.BOLD,17));
+		cancel.setBounds(300,700,100,30);
+		cancel.setBackground(Color.RED);
+		cancel.setForeground(Color.white);
+		cancel.addActionListener(this);
+		add(cancel);
+		
+		
+		
 //======================= Page set up : ==================================
 		
-		getContentPane().setBackground(Color.white);
+		getContentPane().setBackground(Color.LIGHT_GRAY);
 		setSize(850,800);
 		setLocation(350,10);
 		setVisible(true);
@@ -195,6 +215,9 @@ public class SinginTwo extends JFrame implements ActionListener {
 	
 	public void actionPerformed(ActionEvent ea) 
 	{
+		
+		
+		
 		
 		String sreligion=(String)religionBox.getSelectedItem();
 		String scategory=(String) categoryBox.getSelectedItem();
@@ -226,38 +249,52 @@ public class SinginTwo extends JFrame implements ActionListener {
 		
 		
 //---------------------------------------------------------------------------------
-		try
+		if(ea.getSource()==cancel)
 		{
-			if(sreligion.equals(""))
-			{
-				JOptionPane.showMessageDialog(null,"Religion Is Reaqied");
-			}
-			else if(scategory.equals(""))
-			{
-				JOptionPane.showMessageDialog(null,"Category Is Reaqied");
-			}
-			else if(sincome.equals(""))
-			{
-				JOptionPane.showMessageDialog(null,"Income Is Reaqied");
-			}
-			else if(seducation.equals(""))
-			{
-				JOptionPane.showMessageDialog(null,"Education Is Reaqied");
-			}
-			else if(sacupation.equals(""))
-			{
-				JOptionPane.showMessageDialog(null,"Accupation Is Reaqied");
-			}
-			else if(span.equals(""))
-			{
-				JOptionPane.showMessageDialog(null,"PAN Number Is Reaqied");
-			}
-			else if(sadhar.equals(""))
-			{
-				JOptionPane.showMessageDialog(null,"Adhar Number Is Reaqied");
-			}
+			System.exit(0);
+		}
+		else if(ea.getSource()==back)
+		{
+			setVisible(false);
+			new SigninOneModify(formNo).setVisible(true);
+		}
+		
+		else if(ea.getSource()==next)
+		{
 			
 			
+			try
+			{
+				if(sreligion.equals(""))
+				{
+					JOptionPane.showMessageDialog(null,"Religion Is Reaqied");
+				}
+				else if(scategory.equals(""))
+				{
+					JOptionPane.showMessageDialog(null,"Category Is Reaqied");
+				}
+				else if(sincome.equals(""))
+				{
+					JOptionPane.showMessageDialog(null,"Income Is Reaqied");
+				}
+				else if(seducation.equals(""))
+				{
+					JOptionPane.showMessageDialog(null,"Education Is Reaqied");
+				}
+				else if(sacupation.equals(""))
+				{
+					JOptionPane.showMessageDialog(null,"Accupation Is Reaqied");
+				}
+				else if(span.equals(""))
+				{
+					JOptionPane.showMessageDialog(null,"PAN Number Is Reaqied");
+				}
+				else if(sadhar.equals(""))
+				{
+					JOptionPane.showMessageDialog(null,"Adhar Number Is Reaqied");
+				}
+				
+				
 //			else if(setizenShip.equals(""))
 //			{
 //				JOptionPane.showMessageDialog(null,"Sitizen Is Reaqied");
@@ -266,35 +303,37 @@ public class SinginTwo extends JFrame implements ActionListener {
 //			{
 //				JOptionPane.showMessageDialog(null,"Account Exicution Box Is Reaqied");
 //			}
-			
-			
+				
+				
 //=============================Insert INTO SQL Data Base This All Values========================================
-			else
-			{
-				Comn c=new Comn();
+				else
+				{
+					Comn c=new Comn();
 //-------------------------------  4.Execute Query (Values insert into the SQL By using INSERT Query)	------------------------------
-				String query="insert into singin2 values('"+formNo+"','"+sreligion+"',' "+scategory+"','"+sincome+"',' "+seducation+"',' "+sacupation+"',' "+span+"',' "+sadhar+"',' "+setizenShip+"',' "+ACCEX+"')";
-		
-		//Execute the query by using (Statement {s =c..createStatment}) with help of comn Class 
-				c.s.executeUpdate(query);
-				
-				setVisible(false);
-				
-				new SinginThree(formNo).setVisible(true);
+					String query="insert into singin2 values('"+formNo+"','"+sreligion+"',' "+scategory+"','"+sincome+"',' "+seducation+"',' "+sacupation+"',' "+span+"',' "+sadhar+"',' "+setizenShip+"',' "+ACCEX+"')";
+					
+					//Execute the query by using (Statement {s =c..createStatment}) with help of comn Class 
+					c.s.executeUpdate(query);
+					
+					setVisible(false);
+					
+					new SignInThree(formNo).setVisible(true);
+					
+				}
 				
 			}
-			
-		}
-		catch(Exception e)
-		{
-			System.out.println(e);
+			catch(Exception e)
+			{
+				System.out.println(e);
+			}
+		
 		}
 		
 	}
 
 	public static void main(String[] args) 
 	{
-		new SinginTwo("");
+		new SignInTwo("");
 	}
 
 }

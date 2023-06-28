@@ -11,6 +11,7 @@ import javax.swing.*;
 
 public class LogIn extends JFrame implements ActionListener																													
 {
+	
 	//Declaire in GLOBAL
 	JButton Longin,clear,signin;
 	JTextField cardTextField;
@@ -21,74 +22,78 @@ public class LogIn extends JFrame implements ActionListener
 	
 	{
 		this.formNo=formNo;
-		setTitle("AUTOMATED TELLER MECHINE");
+		setTitle("Automated Teller Machine Login/Sign Up Page");
 		setLayout(null);
 		
 		
-		JLabel label=new JLabel();
-		ImageIcon img=new ImageIcon(this.getClass().getResource("/bank.jpg"));
-		Image i2=img.getImage().getScaledInstance(100,100,Image.SCALE_DEFAULT);
+		ImageIcon img=new ImageIcon(this.getClass().getResource("/img3.png"));
+		Image i2=img.getImage().getScaledInstance(400,500,Image.SCALE_SMOOTH);
 		ImageIcon img2=new ImageIcon(i2);
+//		Image img=new ImageIcon(LogIn.class.getResource("/bankpng.png")).getImage().getScaledInstance(200,200,Image.SCALE_SMOOTH);?
+		
+		JLabel label=new JLabel();
+		label.setBackground(Color.MAGENTA);
 		label.setIcon(img2);
-		label.setBounds(31,22,100,86);
+		label.setBounds(0,0,400,500);
 		getContentPane().add(label);
 		
 		//Heading
-		JLabel text=new JLabel("Welcom TO ATM");		text.setFont(new Font("Osword",Font.BOLD,38));
-		text.setBounds(200,40,400,40);
+		JLabel text=new JLabel("Welcom TO ATM");		
+		text.setFont(new Font("Osword",Font.BOLD,38));
+		text.setBounds(450,50,400,40);
 		add(text);
 		
 		//Card Number Text
 		JLabel cardno=new JLabel("Card No:");
 		cardno.setFont(new Font("Raleway",Font.BOLD,25));
-		cardno.setBounds(100,150,150,30);
+		cardno.setBounds(450,150,150,30);
 		add(cardno);
 		
 		//Card Number Text Box
 		 cardTextField=new JTextField();
-		cardTextField.setBounds(250,150,250,30);
+		cardTextField.setBounds(600,150,150,30);
 		cardTextField.setFont(new Font("Raleway",Font.BOLD,15));
 		add(cardTextField);
 		
 		//Pin Number Text
 		JLabel pinno=new JLabel("Pin No:");
 		pinno.setFont(new Font("Raleway",Font.BOLD,25));
-		pinno.setBounds(120,220,250,30);
+		pinno.setBounds(450,250,250,30);
 		add(pinno);
 		
 		//Pin Number Text Box
 		 idTextField=new JPasswordField();
-		idTextField.setBounds(250,220,250,30);
+		idTextField.setBounds(600,250,150,30);
 		idTextField.setFont(new Font("Raleway",Font.BOLD,15));
 		add(idTextField);
 		
 		//Button Long In Box
 		 Longin=new JButton("Log In");
-		Longin.setBounds(250,300,100,30);
-		Longin.setBackground(Color.DARK_GRAY);
-		Longin.setForeground(Color.white);
+		Longin.setBounds(480,330,100,30);
+		Longin.setBackground(Color.GREEN);
+		Longin.setForeground(Color.black);
 		Longin.addActionListener(this);
 		add(Longin);
 		
 		//Button Clear Box
 		 clear=new JButton("Clear");
-		clear.setBounds(400,300,100,30);
-		clear.setBackground(Color.DARK_GRAY);
-		clear.setForeground(Color.white);
+		clear.setBounds(630,330,100,30);
+		clear.setBackground(Color.GREEN);
+		clear.setForeground(Color.black);
 		clear.addActionListener(this);
 		add(clear);
 		
 		
 		//Button Sign In Box
-		 signin=new JButton("Sign In");
-		signin.setBounds(250,350,250,30);
-		signin.setBackground(Color.DARK_GRAY);
-		signin.setForeground(Color.white);
+		 signin=new JButton("Sign Up");
+		signin.setBounds(480,380,250,30);
+		signin.setBackground(Color.GREEN);
+		signin.setForeground(Color.black);
 		signin.addActionListener(this);
 		add(signin);
 		
-		getContentPane().setBackground(Color.white);
-		setSize(800,480);
+		getContentPane().setBackground(Color.PINK);
+		setSize(800,500);
 		setVisible(true);
 		setLocation(350,200);
 	}
@@ -139,7 +144,7 @@ public class LogIn extends JFrame implements ActionListener
 		{
 //		It connect for Other Class this two steps use
 			setVisible(false);
-			new SinginOne().setVisible(true);
+			new SignInOne(formNo).setVisible(true);
 			
 		}
 		
@@ -151,8 +156,7 @@ public class LogIn extends JFrame implements ActionListener
 	public static void main(String args [])
 	{
 		new LogIn("");
-		
-		
+				
 	}
 	
 		

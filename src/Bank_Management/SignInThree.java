@@ -7,7 +7,7 @@ import java.util.Random;
 
 import javax.swing.*;
 
-public class SinginThree extends JFrame implements ActionListener {
+public class SignInThree extends JFrame implements ActionListener {
 	
 	
 //=================	Global Declarartion ====================
@@ -19,7 +19,7 @@ public class SinginThree extends JFrame implements ActionListener {
 	
 	
 //=======	the perameter inside recive the value of 'form number'
-	SinginThree(String formNo)
+	SignInThree(String formNo)
 	{
 		this.formNo=formNo;
 		
@@ -39,27 +39,27 @@ public class SinginThree extends JFrame implements ActionListener {
 		 saccount=new JRadioButton("Saving Accout");
 		 saccount.setFont(new Font("Railway",Font.ROMAN_BASELINE,15));
 		 saccount.setBounds(100,200,200,30);
-		 saccount.setBackground(Color.white);
+		 saccount.setBackground(Color.LIGHT_GRAY);
 		add(saccount);
 		
 		
 		fdaccount=new JRadioButton("Fixed Deposit Accout");
 		fdaccount.setFont(new Font("Railway",Font.ROMAN_BASELINE,15));
-		fdaccount.setBounds(400,200,200,30);
-		fdaccount.setBackground(Color.white);
+		fdaccount.setBounds(400,200,300,30);
+		fdaccount.setBackground(Color.LIGHT_GRAY);
 		add(fdaccount);
 		
 		
 		cuaccount=new JRadioButton("Current Accout");
 		cuaccount.setFont(new Font("Railway",Font.ROMAN_BASELINE,15));
 		cuaccount.setBounds(100,250,200,30);
-		cuaccount.setBackground(Color.white);
+		cuaccount.setBackground(Color.LIGHT_GRAY);
 		add(cuaccount);
 		
 		rdaccount=new JRadioButton("Recurring Deposit Accout");
 		rdaccount.setFont(new Font("Railway",Font.ROMAN_BASELINE,15));
 		rdaccount.setBounds(400,250,300,30);
-		rdaccount.setBackground(Color.white);
+		rdaccount.setBackground(Color.LIGHT_GRAY);
 		add(rdaccount);
 		
 		accountGroup=new ButtonGroup();
@@ -74,9 +74,9 @@ public class SinginThree extends JFrame implements ActionListener {
 		add(cardtype);
 		
 		JLabel massage=new JLabel("Your 16 Dezits Card Number");
-		massage.setFont(new Font("Railway",Font.TYPE1_FONT,15));
+		massage.setFont(new Font("Railway",Font.BOLD,15));
 		massage.setBounds(100,320,300,30);
-		massage.setForeground(Color.green);;
+		massage.setForeground(Color.WHITE);;
 		add(massage);
 		
 		
@@ -92,9 +92,9 @@ public class SinginThree extends JFrame implements ActionListener {
 		add(pintype);
 		
 		JLabel massage1=new JLabel("Your 4 Dezits Password");
-		massage1.setFont(new Font("Railway",Font.TYPE1_FONT,15));
+		massage1.setFont(new Font("Railway",Font.BOLD,15));
 		massage1.setBounds(100,400,300,30);
-		massage1.setForeground(Color.green);;
+		massage1.setForeground(Color.white);;
 		add(massage1);
 		
 		
@@ -112,50 +112,50 @@ public class SinginThree extends JFrame implements ActionListener {
 		 c1=new JCheckBox("ATM Card");
 		 c1.setFont(new Font("Railway",Font.ROMAN_BASELINE,15));
 		c1.setBounds(100,500,150,30);
-		c1.setBackground(Color.white);
+		c1.setBackground(Color.LIGHT_GRAY);
 		add(c1);
 		
 		c2=new JCheckBox("Internet Banking");
 		 c2.setFont(new Font("Railway",Font.ROMAN_BASELINE,15));
 		c2.setBounds(400,500,150,30);
-		c2.setBackground(Color.white);
+		c2.setBackground(Color.LIGHT_GRAY);
 		add(c2);
 		
 		c3=new JCheckBox("Mobile Banking");
 		 c3.setFont(new Font("Railway",Font.ROMAN_BASELINE,15));
 		c3.setBounds(100,550,150,30);
-		c3.setBackground(Color.white);
+		c3.setBackground(Color.LIGHT_GRAY);
 		add(c3);
 		
 		c4=new JCheckBox("Emain & Massage Allert");
 		 c4.setFont(new Font("Railway",Font.ROMAN_BASELINE,15));
 		c4.setBounds(400,550,300,30);
-		c4.setBackground(Color.white);
+		c4.setBackground(Color.LIGHT_GRAY);
 		add(c4);
 		
 		
 		c5=new JCheckBox("Chack Book");
 		 c5.setFont(new Font("Railway",Font.ROMAN_BASELINE,15));
 		c5.setBounds(100,600,150,30);
-		c5.setBackground(Color.white);
+		c5.setBackground(Color.LIGHT_GRAY);
 		add(c5);
 		
 		c6=new JCheckBox("E-Statement");
 		 c6.setFont(new Font("Railway",Font.ROMAN_BASELINE,15));
 		c6.setBounds(400,600,150,30);
-		c6.setBackground(Color.white);
+		c6.setBackground(Color.LIGHT_GRAY);
 		add(c6);
 		
 		c7=new JCheckBox("I Here By Declaire that the Above Entered Details Are Correct To The Best Of My Knowlwdge");
 		 c7.setFont(new Font("Railway",Font.ROMAN_BASELINE,13));
-		c7.setBounds(100,650,1000,30);
-		c7.setBackground(Color.white);
+		c7.setBounds(100,650,600,30);
+		c7.setBackground(Color.LIGHT_GRAY);
 		add(c7);
 		
 		 submit=new JButton("Submit");
 		submit.setFont(new Font("Railway",Font.BOLD,17));
-		submit.setBounds(500,700,100,40);
-		submit.setBackground(Color.BLACK);
+		submit.setBounds(500,700,100,30);
+		submit.setBackground(Color.BLUE);
 		submit.setForeground(Color.white);
 		submit.addActionListener(this);
 		add(submit);
@@ -163,8 +163,8 @@ public class SinginThree extends JFrame implements ActionListener {
 		
 		 cancel=new JButton("Cancel");
 		cancel.setFont(new Font("Railway",Font.BOLD,17));
-		cancel.setBounds(300,700,100,40);
-		cancel.setBackground(Color.BLACK);
+		cancel.setBounds(300,700,100,30);
+		cancel.setBackground(Color.RED);
 		cancel.setForeground(Color.white);
 		cancel.addActionListener(this);
 		add(cancel);
@@ -172,15 +172,15 @@ public class SinginThree extends JFrame implements ActionListener {
 		
 		back=new JButton("Back");
 		back.setFont(new Font("Railway",Font.BOLD,17));
-		back.setBounds(100,700,100,40);
-		back.setBackground(Color.BLACK);
+		back.setBounds(100,700,100,30);
+		back.setBackground(Color.MAGENTA);
 		back.setForeground(Color.white);
 		back.addActionListener(this);
 		add(back);
 		
 		
 //======================= Page set up : ==================================
-		getContentPane().setBackground(Color.white);
+		getContentPane().setBackground(Color.LIGHT_GRAY);
 		setSize(850,820);
 		setLocation(350,0);
 		setVisible(true);
@@ -304,7 +304,7 @@ public class SinginThree extends JFrame implements ActionListener {
 		else if(e.getSource()==back)
 		{
 			setVisible(false);
-			new SinginTwo(formNo).setVisible(true);
+			new SignIn_Two_Modify(formNo).setVisible(true);
 		}
 		
 	}
@@ -312,7 +312,7 @@ public class SinginThree extends JFrame implements ActionListener {
 	
 	public static void main(String args[])
 	{
-		new SinginThree("");
+		new SignInThree("");
 	}
 
 }

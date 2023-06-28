@@ -20,7 +20,7 @@ public class Withdraw extends JFrame implements ActionListener
 	Withdraw(String pinnumber)
 	{
 		this.pinnumber=pinnumber;
-		
+		setUndecorated(true);
 		setLayout(null);
 		
 		JLabel label=new JLabel();

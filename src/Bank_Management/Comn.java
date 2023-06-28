@@ -1,19 +1,15 @@
 
-
-
 /*Data Base connection in 5 Steps There are
-  1.Regester the driver
-  2.Create connectivety 
+  1.Register the driver
+  2.Create connectivity  
   3.Create Statement
   4.Execute Query
-  5.Close Connection*/
+  5.Close Connection	*/
 
 
 package Bank_Management;
 
 import java.sql.*;
-
-//import java.sql.*;
 
 public class Comn
 {
@@ -40,3 +36,4 @@ public class Comn
 	}
 
 }
+																																																																													
